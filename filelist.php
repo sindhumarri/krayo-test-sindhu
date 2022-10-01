@@ -5,7 +5,8 @@ if (!isset($_SESSION['userData'])) {
     header('location: index.php');
 }
 $msg = '';
-$query = "SELECT * FROM `uploading`;";
+$userid = $_SESSION['userData']['id'];
+$query = "SELECT * FROM `uploading` where user_id = $userid;";
 $result = $conn->query($query);
 if (mysqli_num_rows($result) > 0) {
 } else {
@@ -29,33 +30,37 @@ if (mysqli_num_rows($result) > 0) {
 </head>
 
 <body>
-    <h1>Display file list </h1>
-    <div class="panel-heading clearfix">
-        <!-- <h4 class="panel-title pull-left">Welcome User</h4> -->
-        <div class="btn-group pull-left">
-            <a href="view.php" class="btn btn-primary">Home</a>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h4 class="panel-title pull-left">Display file list</h4>
+                <div class="btn-group pull-right parent d-flex">
+                    <a href="upload.php" class="btn btn-primary btn-space">Upload Files</a>
+                    <a href="view.php" class="btn btn-info">Home</a>
+                </div>
+            </div>
+            <?= $msg; ?>
+            <table border="1px" style="width:100%; line-height:40px;">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>File Name</th>
+                        <th>File Download</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    while ($row = $result->fetch_assoc()) { ?>
+                        <tr>
+                            <td><?php echo $_SESSION['userData']['l_name']; ?></td>
+                            <td><?php echo $row['file_name']; ?></td>
+                            <td><a href=<?php echo $row['file_path']; ?> download> <?php echo $row['file_name']; ?></a></td>
+                        <tr>
+                        <?php } ?>
+                </tbody>
+            </table>
         </div>
     </div>
-    <?= $msg; ?>
-    <table border="1px" style="width:600px; line-height:40px;">
-        <thead>
-            <tr>
-                <th>User Name</th>
-                <th>File Name</th>
-                <th>File Download</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            while ($row = $result->fetch_assoc()) { ?>
-                <tr>
-                    <td><?php echo $_SESSION['userData']['l_name']; ?></td>
-                    <td><?php echo $row['file_name']; ?></td>
-                    <td><a href=<?php echo $row['file_path']; ?> download> <?php echo $row['file_name']; ?></a></td>
-                <tr>
-                <?php } ?>
-        </tbody>
-    </table>
 </body>
 
 </html>

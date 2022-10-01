@@ -29,8 +29,9 @@ if (!isset($_SESSION['userData'])) {
 
 				echo '<div class="panel-heading clearfix">
 			  		<h4 class="panel-title pull-left">Welcome User</h4>
-			  		<div class="btn-group pull-right">
-					<a href="upload.php" class="btn btn-primary">Upload Files</a>
+			  		<div class="btn-group pull-right parent d-flex">
+					<a href="upload.php" class="btn btn-primary btn-space">Upload Files</a>
+					<a href="filelist.php" class="btn btn-info">Files List</a>
 			  		</div></div>';
 				echo '<img src="' . $_SESSION['userData']['picture'] . '" class="img-responsive img-circle img-thumbnail" />';
 				echo '<h3><b>Name :</b> ' . $_SESSION['userData']['f_name'] . " " . $_SESSION['userData']['l_name'] . '</h3>';

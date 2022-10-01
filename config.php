@@ -10,7 +10,7 @@ $db = "krayo";
 ##### Google App Configuration #####
 $googleappid = "131581938677-cr7otneo1vjius87c1fpq0g34r8735vi.apps.googleusercontent.com"; 
 $googleappsecret = "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"; 
-$redirectURL = "http://localhost/googlephp/authenticate.php"; 
+$redirectURL = "http://localhost/krayo-test-sindhu/authenticate.php"; 
 
 ##### Create connection #####
 $conn = new mysqli($servername, $username, $password, $db);
